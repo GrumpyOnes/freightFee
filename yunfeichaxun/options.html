@@ -1,0 +1,181 @@
+<html>
+<head>
+<meta charset="utf-8">
+<title>Calculating freight of Deppon</title>
+</head>
+<style>
+*{
+padding:0;
+margin:0;
+box-sizing:border-box;
+}
+body{
+font-size:14px;
+line-heihgt:1.5em;
+font-family:'microsoft yahei';
+}
+li{
+list-style:none;
+}
+input{
+outline:none;
+border:none;
+padding:0 0.5em;
+}
+.main-wrap{
+width:600px;
+margin:2em auto;
+}
+.setting-wrap{}
+.setting-wrap .setting-toggle{
+width:100%;
+height:0.75em;
+font-size:12px;
+text-align:right;
+border-bottom:1px rgba(0,0,0,0.1) solid;
+margin-bottom:1em;}
+.setting-wrap .setting-toggle span{
+padding:0 1em;background:#fff;
+margin-right:2em;
+color:rgba(0,0,0,0.5);
+cursor:pointer;
+}
+.setting-wrap .setting-container{
+display:none;
+background:rgba(126,247,97,0.1);
+text-align:center;
+margin:0 0 1em 0;
+padding:2em;
+display:none;
+} 
+.setting-wrap .setting-container .intro{
+ color:rgba(1,1,1,0.5);
+ line-height:4em;
+}
+.setting-wrap .setting-container .input-wrap{
+	font-size:1.5rem;
+}
+.setting-wrap .setting-container .input-wrap input{
+	font-size:1.5rem;
+	line-height:1.5em;
+	background:none;
+	text-align:right;
+	border-bottom:1px rgba(0,0,0,0.3) solid;
+}
+.search-param-wrap{
+	width:100%;
+	text-align:center;
+	padding-bottom:1em;
+	border-bottom:1px rgba(0,0,0,0.1) solid;
+}
+.search-param-wrap input{
+	border-bottom:1px rgba(0,0,0,0.3) solid;
+}
+.search-param-wrap input.input-city{
+	width:6em;
+	margin-right:2em;
+}
+.search-param-wrap input.input-weight{
+	width:6em;
+	text-align:right;
+}
+.search-result-wrap li{
+	line-height:2.4em;
+	overflow: hidden;
+}
+.search-result-wrap li.title{
+background:rgba(0,0,0,0.1);
+}
+.search-result-wrap li:not(.title){
+border-bottom:1px rgba(0,0,0,0.1)  solid;
+}
+.search-result-wrap li:not(.title):nth-child(odd){
+	background:rgba(0,0,0,0.05);
+}
+.search-result-wrap li span{
+	width:110px;
+	padding:0 0 0 6px;
+	display:block;
+	float:left;
+}
+.search-result-wrap li span.city{
+	width:150px;
+}
+.search-result-wrap li span font{
+	font-weight:900;
+	margin-right:0.3em;
+}
+.search-result-wrap li span.freight{
+background:rgba(0,0,0,0.05);}
+.no-data-remind{
+	display:none;
+	font-size:3em;
+	text-align:center;
+	color:rgba(0,0,0,0.2);
+	line-height:3em;
+}
+.alert{
+color:red;
+font-size:12px;}
+</style>
+<body>
+<div class="main-wrap">
+	<div class="setting-wrap">
+		<p id="settingToggle" class="setting-toggle"><span>Setting</span></p>
+		<div id="settingContainer" class="setting-container">
+			<p class="intro">请重置你的折扣值（1-10之间的整数/小数）</p>
+			<p class="input-wrap"><input id="inputOff" class="input-off" type="number" min="1" max="10"></input><span>折</span></p>
+			<p id="settingContainerAlert" class="alert setting-container-alert"></p>
+		</div>
+	</div>
+	<div class="search-param-wrap">
+		<span>SH - </span><input id="inputCity" class="input-city" type="text" placeholder="城市首字母" maxlength="4" ></input>
+		<input id="inputWeight" class="input-weight" type="number" min="0" placeholder="公斤数" max="500"></input><span>KG</span>
+		<span>&nbsp;&nbsp;<font id="saleOff"></font>0% Sale</span>
+		<p id="searchParamAlert" class=" alert search-param-alert"></p>
+	</div>
+	<div class="search-result-wrap">
+		<ul>
+			<div class="li-result-wrap">
+
+			<li class="title">
+				<span class="city">城市</span>
+				<span class="weight">重量</span>
+				<span class="freight">运费</span>
+				<span class="sentcost">送货</span>
+				<span class="amount">总计</span>
+			</li>
+			</div>
+			<p id="noDataRemind" class="no-data-remind">暂无数据</p>
+			<div id="liResultWrap" class="li-result-wrap">
+				
+				<li>
+					<span class="city">江苏 南京</span>
+					<span class="weight"><font>77</font>KG</span>
+					<span class="cost-1"><font>243</font>元</span>
+					<span class="cost-2"><font>323</font>元</span>
+					<span class="sale-off">80%</span>
+				</li>
+				<li>
+					<span class="city">江苏 南京</span>
+					<span class="weight"><font>77</font>KG</span>
+					<span class="cost-1"><font>243</font>元</span>
+					<span class="cost-2"><font>323</font>元</span>
+					<span class="sale-off">80%</span>
+				</li>
+				<li>
+					<span class="city">江苏 南京</span>
+					<span class="weight"><font>77</font>KG</span>
+					<span class="cost-1"><font>243</font>元</span>
+					<span class="cost-2"><font>323</font>元</span>
+					<span class="sale-off">80%</span>
+				</li>
+			</div>
+		</ul>
+	</div>
+<div>
+</body>
+<script src="js/data-city.js"></script>
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/deppon-cost.js"></script>
+</html>
